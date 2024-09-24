@@ -1,0 +1,35 @@
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/" 
+    schedule:
+      interval: "daily" 
+    commit-message:
+      prefix: "maven"
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"  
+  - package-ecosystem: "gradle"
+    directory: "/" 
+    schedule:
+      interval: "daily" 
+    commit-message:
+      prefix: "gradle"
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"  
+    - package-ecosystem: "docker"
+    directory: "/" 
+    schedule:
+      interval: "daily" 
+    commit-message:
+      prefix: "docker"
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"  
