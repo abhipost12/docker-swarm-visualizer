@@ -26,3 +26,16 @@ jobs:
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: snyk.sarif
+
+  # Automatically create a PR if vulnerabilities are detected
+    - name: Create pull request if vulnerabilities found
+      if: always()  # Runs even if the Snyk job fails due to vulnerabilities
+      uses: peter-evans/create-pull-request@v5
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Fix vulnerabilities found by Snyk"
+          committer: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          title: "Fix vulnerabilities"
+          body: "Snyk has detected vulnerabilities, this PR attempts to fix them."
+          branch: "fix/snyk-vulnerabilities"
+        
